@@ -1,3 +1,10 @@
+import {get_piece,is_empty} from "./piece.js"
+
+export function check_bounds(square){
+    // Returns true if square in bounds
+    return (square[0] <= 7 && square[0] >= 0) && (square[1] <= 7 && square[1] >= 0);
+}
+
 export function copy_board(board){
     // Returns copied array representation of board position
     let board2 = [];
@@ -42,80 +49,6 @@ export function print_board(board, as_white = true){
         console.log("  h g f e d c b a");
     }
     console.log()
-}
-
-export function check_bounds(square){
-    // Returns true if square in bounds
-    return (square[0] <= 7 && square[0] >= 0) && (square[1] <= 7 && square[1] >= 0);
-}
-
-export function get_piece(board,square){
-    // Returns piece representation of square.
-    return board[square[0]][square[1]];
-}
-
-export function check_occupied(board,square){
-    // Returns true if square occupied.
-    if (get_piece(board,square) === " "){
-        return false;
-    }
-
-    return true;
-}
-
-export function check_color(board,square){
-    // Returns 0 if square unoccupied, 1 if white piece and -1 if black piece.
-    if (!check_occupied(board,square)){
-        return 0;
-    }
-
-    const code = get_piece(board,square).charCodeAt(0);
-    if (code >= 65 &&  code <= 90){
-        return 1;
-    }
-
-    return -1;
-}
-
-export function is_white_piece(board,square){
-    // Returns true if square occupied by white piece
-    return (check_color(board,square) == 1)         
-}
-
-export function is_black_piece(board,square){
-    // Returns true if square occupied by black piece
-    return (check_color(board,square) == -1)         
-}
-
-export function is_empty(board,square){
-    // Returns true if square unoccupied
-    return (check_color(board,square) == 0)         
-}
-
-export function same_color_piece(board,start,end){
-    // Returns true if both squares occupied by same colored piece
-    if (is_white_piece(board,start) && is_white_piece(board,end)){
-        return true;
-    }
-
-    if (is_black_piece(board,start) && is_black_piece(board,end)){
-        return true;
-    }
-
-    return false;
-}
-
-export function diff_color_piece(board,start,end){
-    // Returns true if both squares occupied by different colored piece
-    if (is_white_piece(board,start) && is_black_piece(board,end)){
-        return true;
-    }
-
-    if (is_black_piece(board,start) && is_white_piece(board,end)){
-        return true;
-    }
-
-    return false;
 }
 
 export function init_fen(){
@@ -282,4 +215,6 @@ export function retrieve_meta(fen){
     if (enpassant !== "-"){
         res["enpassant"] = enpassant;
     }
+
+    return res;
 }
