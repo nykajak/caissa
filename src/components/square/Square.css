@@ -1,0 +1,25 @@
+.square{
+    display: flex;
+    width:50px;
+    height:50px;
+    align-items: center;
+    justify-content: center;
+}
+
+.black-square{
+    background-color: rgb(48, 48, 48);
+}
+
+.white-square{
+    background-color: grey;
+}
+
+.selected-square{
+    background-color:rebeccapurple;
+    opacity: 0.8;
+}
+
+.possible-col{
+    background-color:gold;
+    opacity: 0.5;
+}
