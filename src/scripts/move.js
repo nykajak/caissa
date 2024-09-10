@@ -273,6 +273,43 @@ export function get_legal_king(fen,square){
     }
 
     // Check for castling
+    if (!is_in_check(fen)){
+        if (meta["turn"] === 1){
+            if (meta["whiteKingSideCastle"] === 1){
+                if (is_empty(board,[square[0], square[1] + 1]) && is_empty(board,[square[0], square[1] + 2])){
+                    if (is_safe(fen,square,[square[0], square[1] + 1]) && is_safe(fen,square,[square[0], square[1] + 2])){
+                        moves.push([square[0],square[1] + 2])
+                    }
+                }
+            }
+
+            if (meta["whiteQueenSideCastle"] === 1){
+                if (is_empty(board,[square[0], square[1] - 1]) && is_empty(board,[square[0], square[1] - 2])){
+                    if (is_safe(fen,square,[square[0], square[1] - 1]) && is_safe(fen,square,[square[0], square[1] - 2])){
+                        moves.push([square[0],square[1] - 2])
+                    }
+                }
+            }
+        }
+
+        else{
+            if (meta["blackKingSideCastle"] === 1){
+                if (is_empty(board,[square[0], square[1] + 1]) && is_empty(board,[square[0], square[1] + 2])){
+                    if (is_safe(fen,square,[square[0], square[1] + 1]) && is_safe(fen,square,[square[0], square[1] + 2])){
+                        moves.push([square[0],square[1] + 2])
+                    }
+                }
+            }
+
+            if (meta["blackQueenSideCastle"] === 1){
+                if (is_empty(board,[square[0], square[1] - 1]) && is_empty(board,[square[0], square[1] - 2])){
+                    if (is_safe(fen,square,[square[0], square[1] - 1]) && is_safe(fen,square,[square[0], square[1] - 2])){
+                        moves.push([square[0],square[1] - 2])
+                    }
+                }
+            }
+        }
+    }
 
     moves = moves.filter((x)=>is_safe(fen,square, x))
     return moves;
@@ -430,6 +467,45 @@ export function make_move(fen, notation_start, notation_end){
         return fen;
     }
 
+    if (is_rook(board,start)){
+        if (meta["turn"] === 1){
+            if (start[1] === 7){
+                meta["whiteKingSideCastle"] = 0;
+            }
+            else if (start[1] === 0){
+                meta["whiteQueenSideCastle"] = 0;
+            }
+        }
+
+        else{
+            if (start[1] === 7){
+                meta["blackKingSideCastle"] = 0;
+            }
+            else if (start[1] === 0){
+                meta["blackQueenSideCastle"] = 0;
+            }
+        }
+    }
+
+    if (is_king(board,start)){
+        if (meta["turn"] === 1){
+            meta["whiteKingSideCastle"] = 0;
+            meta["whiteQueenSideCastle"] = 0;
+        }
+
+        else{
+            meta["blackKingSideCastle"] = 0;
+            meta["blackQueenSideCastle"] = 0;
+        }
+
+
+        if (end[1] - start[1] === 2){
+            make_move_raw(board,[end[0],end[1]+1],[end[0],end[1]-1])
+        }
+        else if (end[1] - start[1] === -2){
+            make_move_raw(board,[end[0],end[1]-2],[end[0],end[1]+1])
+        }
+    }
 
     if (is_pawn(board,start)){
 
