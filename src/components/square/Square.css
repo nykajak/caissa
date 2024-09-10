@@ -15,11 +15,10 @@
 }
 
 .selected-square{
-    background-color:rebeccapurple;
     opacity: 0.8;
 }
 
-.possible-col{
-    background-color:gold;
-    opacity: 0.5;
+.possible-square{
+    /* background-color:rgb(128, 0, 255); */
+    opacity: 0.3;
 }
