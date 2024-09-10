@@ -1,6 +1,6 @@
 import { check_bounds,copy_board,retrieve_board,retrieve_meta,retrieve_fen} from "./board.js";
 import { get_piece,is_rook,is_queen,is_bishop,is_knight,is_pawn,is_king,same_color_piece,diff_color_piece,is_white_piece,is_black_piece,is_empty } from "./piece.js";
-import {get_square} from "./notation.js"
+import {get_notation, get_square} from "./notation.js"
 
 export function see_direction(board,start,direction){
     // Find first opponents piece in a certain direction from start. Needs a piece to be on start
@@ -76,7 +76,7 @@ export function attacked(board,square){
     }
 
     // Pawn
-    if (is_black_piece(board,square)){is_knight
+    if (is_black_piece(board,square)){
         let candidate1 = [square[0] + 1, square[1] - 1];
         if (check_bounds(candidate1) && diff_color_piece(board,square,candidate1) && is_pawn(board,candidate1)){
             // attackers.push(candidate1);
@@ -306,6 +306,16 @@ export function get_legal_pawn(fen,square){
         if (check_bounds(candidate) && is_black_piece(board,candidate)){
             moves.push(candidate);
         }
+
+        if (meta["enpassant"] !== 0){
+            candidate = get_square(meta["enpassant"]);
+
+            let cond1 = square[0] - candidate[0] === 1 && square[1] - candidate[1] === 1;
+            let cond2 = square[0] - candidate[0] === 1 && square[1] - candidate[1] === -1;
+            if (cond1 || cond2){
+                moves.push(candidate);
+            }
+        }
     }
 
     else if (is_black_piece(board,square)){
@@ -330,9 +340,18 @@ export function get_legal_pawn(fen,square){
         if (check_bounds(candidate) && is_white_piece(board,candidate)){
             moves.push(candidate);
         }
+
+        if (meta["enpassant"] !== 0){
+            candidate = get_square(meta["enpassant"]);
+
+            let cond1 = square[0] - candidate[0] === -1 && square[1] - candidate[1] === 1;
+            let cond2 = square[0] - candidate[0] === -1 && square[1] - candidate[1] === -1;
+            if (cond1 || cond2){
+                moves.push(candidate);
+            }
+        }
     }
-    
-    // Check for en passant
+
     // Check for promotion
     
     moves = moves.filter(x=>is_safe(fen,square, x));
@@ -381,6 +400,7 @@ export function get_legal(fen,square){
     }
 }
 
+
 export function make_move_raw(board,start_square,end_square){
     // Make move on board from start to end. Naive
     board[end_square[0]][end_square[1]] = get_piece(board,start_square);
@@ -391,9 +411,12 @@ export function make_move(fen, notation_start, notation_end){
     let board = retrieve_board(fen);
     let meta = retrieve_meta(fen);
 
+
     const start = get_square(notation_start);
     const end = get_square(notation_end);
     let legal_moves = get_legal(fen,start);
+
+    meta["enpassant"] = 0;
 
     let possible = false;
     for (let m of legal_moves){
@@ -403,11 +426,38 @@ export function make_move(fen, notation_start, notation_end){
         }
     }
 
-    if (possible){
-        make_move_raw(board,start,end)
-        meta["turn"] = 1 - meta["turn"]
-        return retrieve_fen(board,meta);
+    if (!possible){
+        return fen;
     }
+
+
+    if (is_pawn(board,start)){
+
+        if (is_empty(board,end) && Math.abs(end[1] - start[1]) === 1){ // Column differs
+            if (meta["turn"] === 1){
+                board[end[0] + 1][end[1]] = " "
+            }
+
+            else{
+                board[end[0] - 1][end[1]] = " "
+            }
+        }
+
+        else if (Math.abs(end[1] - start[1]) === 0 && Math.abs(end[0] - start[0]) === 2){
+            if (meta["turn"] === 1){
+                meta["enpassant"] = get_notation([end[0] + 1,end[1]])
+            }
+
+            else{
+                meta["enpassant"] = get_notation([end[0] - 1,end[1]])
+            }
+        }
+    }
+
+
+    make_move_raw(board,start,end)
+    meta["turn"] = 1 - meta["turn"]
+    return retrieve_fen(board,meta);
 
     return fen;
 }

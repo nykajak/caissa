@@ -10,20 +10,9 @@ export default function Board({startState = init_fen()}){
     const [currBoard,setCurrBoard] = useState(0);
     const [move,setMove] = useState([]);
 
-    // useEffect(()=>{
-    //     let s = document.getElementsByClassName("selected-square");
-    //     for (let i of s){
-    //         console.log(i);
-    //         i.classList.remove("selected-square");
-    //     }
-
-    //     s = document.getElementsByClassName("possible-square");
-    //     for (let i of s){
-    //         console.log(i);
-    //         i.classList.remove("possible-square");
-    //     }
-    //     console.log(move)
-    // },[currBoard,listBoards])
+    useEffect(()=>{
+         console.log(listBoards[currBoard])
+    },[currBoard])
 
     useEffect(()=>{
         console.log(move);
@@ -62,6 +51,7 @@ export default function Board({startState = init_fen()}){
             }
 
             let res = make_move(listBoards[currBoard],move[0],move[1])
+            console.log(res)
 
             if (res !== listBoards[currBoard]){
                 if (currBoard + 1 !== listBoards.length){
