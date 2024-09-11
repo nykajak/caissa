@@ -11,11 +11,11 @@ export default function Board({startState = init_fen()}){
     const [move,setMove] = useState([]);
 
     useEffect(()=>{
-         console.log(listBoards[currBoard])
+        //  console.log(listBoards[currBoard])
     },[currBoard])
 
     useEffect(()=>{
-        console.log(move);
+        // console.log(move);
         let fen = listBoards[currBoard];
 
         if (move.length === 1){
@@ -51,7 +51,7 @@ export default function Board({startState = init_fen()}){
             }
 
             let res = make_move(listBoards[currBoard],move[0],move[1])
-            console.log(res)
+            // console.log(res)
 
             if (res !== listBoards[currBoard]){
                 if (currBoard + 1 !== listBoards.length){
