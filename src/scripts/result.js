@@ -3,7 +3,7 @@ import { get_legal, is_in_check } from "./move.js";
 import { retrieve_board, retrieve_meta } from "./board.js";
 
 export function is_checkmate(fen){
-    
+    // Returns true if side to move is in checkmate
     let board = retrieve_board(fen);
     let meta = retrieve_meta(fen);
 
@@ -26,6 +26,7 @@ export function is_checkmate(fen){
 }
 
 export function is_stalemate(fen){
+    // Returns true if side to move is in stalemate
     let board = retrieve_board(fen);
     let meta = retrieve_meta(fen);
     
@@ -48,6 +49,7 @@ export function is_stalemate(fen){
 }
 
 export function promotion_needed(fen){
+    // Returns square of pawn to be promoted.
     let board = retrieve_board(fen);
     let meta = retrieve_meta(fen);
 

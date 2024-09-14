@@ -20,7 +20,7 @@ export function see_direction(board,start,direction){
 }
 
 export function attacked(board,square){
-    // let attackers = [];
+    // Function returns true if square containing piece attacked by piece of opposite color
 
     // Rook / Queen
     for (let i = -1; i <= 1; i++){
@@ -28,7 +28,6 @@ export function attacked(board,square){
             for (let j = -1; j <= 1; j += 2){
                 let res = see_direction(board,square,[i, j]);
                 if (check_bounds(res) && (is_rook(board,res) || is_queen(board,res))){
-                    // attackers.push(res);
                     return true;
                 }
             }
@@ -37,7 +36,6 @@ export function attacked(board,square){
         else{
             let res = see_direction(board,square,[i, 0]);
             if (check_bounds(res) && (is_rook(board,res) || is_queen(board,res))){
-                // attackers.push(res);
                 return true;
             }
         }
@@ -48,7 +46,6 @@ export function attacked(board,square){
         for (let j = -1; j <= 1; j+=2){
             let res = see_direction(board,square,[i, j]);
             if (check_bounds(res) && (is_bishop(board,res) || is_queen(board,res))){
-                // attackers.push(res);
                 return true;
             }
         }
@@ -59,8 +56,7 @@ export function attacked(board,square){
         for (let j = -1; j <= 1; j += 2){
             let candidate1 = [square[0] + i, square[1] + j];
             if (!(i === 0) && check_bounds(candidate1)){
-                if (diff_color_piece(board,square,candidate1) && is_knight(board,candidate1)){
-                    // attackers.push(candidate1);   
+                if (diff_color_piece(board,square,candidate1) && is_knight(board,candidate1)){                    
                     return true;
                 }
             }
@@ -68,7 +64,6 @@ export function attacked(board,square){
             let candidate2 = [square[0] + j, square[1] + i];
             if (!(i === 0) && check_bounds(candidate2)){
                 if (diff_color_piece(board,square,candidate2) && is_knight(board,candidate2)){
-                    // attackers.push(candidate2);
                     return true;
                 }
             }
@@ -78,28 +73,24 @@ export function attacked(board,square){
     // Pawn
     if (is_black_piece(board,square)){
         let candidate1 = [square[0] + 1, square[1] - 1];
-        if (check_bounds(candidate1) && diff_color_piece(board,square,candidate1) && is_pawn(board,candidate1)){
-            // attackers.push(candidate1);
+        if (check_bounds(candidate1) && diff_color_piece(board,square,candidate1) && is_pawn(board,candidate1)){            
             return true;
         }
 
         let candidate2 = [square[0] + 1, square[1] + 1];
-        if (check_bounds(candidate2) && diff_color_piece(board,square,candidate2) && is_pawn(board,candidate2)){
-            // attackers.push(candidate2);
+        if (check_bounds(candidate2) && diff_color_piece(board,square,candidate2) && is_pawn(board,candidate2)){            
             return true;
         }
     }
 
     else if(is_white_piece(board,square)){
         let candidate1 = [square[0] - 1, square[1] - 1];
-        if (check_bounds(candidate1) && diff_color_piece(board,square,candidate1) && is_pawn(board,candidate1)){
-            // attackers.push(candidate1);
+        if (check_bounds(candidate1) && diff_color_piece(board,square,candidate1) && is_pawn(board,candidate1)){            
             return true;
         }
 
         let candidate2 = [square[0] - 1, square[1] + 1];
-        if (check_bounds(candidate2) && diff_color_piece(board,square,candidate2) && is_pawn(board,candidate2)){
-            // attackers.push(candidate2);
+        if (check_bounds(candidate2) && diff_color_piece(board,square,candidate2) && is_pawn(board,candidate2)){            
             return true;
         }
     }
@@ -113,17 +104,16 @@ export function attacked(board,square){
 
             let candidate = [square[0] + i, square[1] + j];
             if (check_bounds(candidate) && diff_color_piece(board,square,candidate) && is_king(board,candidate)){
-                // attackers.push(candidate);
                 return true;
             }
         }
     }
     
-    // return attackers
     return false;
 }
 
 export function is_in_check(fen){
+    // Returns true if side to move is in check
     let board = retrieve_board(fen);
     let meta = retrieve_meta(fen);
 
@@ -147,6 +137,7 @@ export function is_in_check(fen){
 }
 
 export function is_safe(fen,start,end){
+    // Returns true if move made does not lead to check.
     let board = retrieve_board(fen);
     let meta = retrieve_meta(fen);
 
@@ -344,6 +335,7 @@ export function get_legal_pawn(fen,square){
             moves.push(candidate);
         }
 
+        // Enpassant handled here
         if (meta["enpassant"] !== 0){
             candidate = get_square(meta["enpassant"]);
 
@@ -378,6 +370,7 @@ export function get_legal_pawn(fen,square){
             moves.push(candidate);
         }
 
+        // Enpassant handled here
         if (meta["enpassant"] !== 0){
             candidate = get_square(meta["enpassant"]);
 
@@ -388,8 +381,6 @@ export function get_legal_pawn(fen,square){
             }
         }
     }
-
-    // Check for promotion
     
     moves = moves.filter(x=>is_safe(fen,square, x));
     return moves;
@@ -400,6 +391,7 @@ export function get_legal(fen,square){
     let board = retrieve_board(fen);
     let meta = retrieve_meta(fen)
 
+    // Check if player to move and color of piece same.
     if (meta["turn"] === 1 && is_black_piece(board,square)){
         return []
     }
@@ -407,6 +399,7 @@ export function get_legal(fen,square){
         return []
     }
     
+    // Find all legal moves for piece on square.
     if (is_king(board,square)){
         return get_legal_king(fen,square);
     }
@@ -428,7 +421,6 @@ export function get_legal(fen,square){
     }
 
     else if (is_pawn(board,square)){
-        // Check for promotion seperately.
         return get_legal_pawn(fen,square);
     }
 
@@ -445,6 +437,7 @@ export function make_move_raw(board,start_square,end_square){
 }
 
 export function make_move(fen, notation_start, notation_end){
+    // Make move and return FEN of resulting position.
     let board = retrieve_board(fen);
     let meta = retrieve_meta(fen);
 
@@ -453,7 +446,7 @@ export function make_move(fen, notation_start, notation_end){
     const end = get_square(notation_end);
     let legal_moves = get_legal(fen,start);
 
-    meta["enpassant"] = 0;
+    meta["enpassant"] = 0; // Set enpassant to false after finding all legal moves.
 
     let possible = false;
     for (let m of legal_moves){
@@ -463,10 +456,12 @@ export function make_move(fen, notation_start, notation_end){
         }
     }
 
+    // Return current position data if move not legal
     if (!possible){
         return fen;
     }
 
+    // Handling losing castling rights for rook
     if (is_rook(board,start)){
         if (meta["turn"] === 1){
             if (start[1] === 7){
@@ -488,6 +483,7 @@ export function make_move(fen, notation_start, notation_end){
     }
 
     if (is_king(board,start)){
+        // Handling losing castling rights for king
         if (meta["turn"] === 1){
             meta["whiteKingSideCastle"] = 0;
             meta["whiteQueenSideCastle"] = 0;
@@ -498,7 +494,7 @@ export function make_move(fen, notation_start, notation_end){
             meta["blackQueenSideCastle"] = 0;
         }
 
-
+        // Handling moving rook when castling.
         if (end[1] - start[1] === 2){
             make_move_raw(board,[end[0],end[1]+1],[end[0],end[1]-1])
         }
@@ -508,8 +504,9 @@ export function make_move(fen, notation_start, notation_end){
     }
 
     if (is_pawn(board,start)){
-
+        // Handling en passant
         if (is_empty(board,end) && Math.abs(end[1] - start[1]) === 1){ // Column differs
+            // Removing captured piece.
             if (meta["turn"] === 1){
                 board[end[0] + 1][end[1]] = " "
             }
@@ -520,6 +517,7 @@ export function make_move(fen, notation_start, notation_end){
         }
 
         else if (Math.abs(end[1] - start[1]) === 0 && Math.abs(end[0] - start[0]) === 2){
+            // Updating meta to indicate enpassant possible.
             if (meta["turn"] === 1){
                 meta["enpassant"] = get_notation([end[0] + 1,end[1]])
             }
@@ -534,6 +532,4 @@ export function make_move(fen, notation_start, notation_end){
     make_move_raw(board,start,end)
     meta["turn"] = 1 - meta["turn"]
     return retrieve_fen(board,meta);
-
-    return fen;
 }

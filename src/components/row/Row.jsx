@@ -1,7 +1,7 @@
 import {Square} from "../square/Square.jsx"
 import "./Row.css"
 export function Row({board,x,perspective,move,setMove}){
-
+    // Renders 8 squares
     if (perspective === 1){
         return <>
             <div className="row"> 

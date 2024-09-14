@@ -6,18 +6,14 @@ import {Row} from "../row/Row.jsx"
 import "./Board.css"
 
 export default function Board({startState = init_fen()}){
-    const [listBoards,setListBoards] = useState([startState]);
-    const [currBoard,setCurrBoard] = useState(0);
-    const [move,setMove] = useState([]);
+    const [listBoards,setListBoards] = useState([startState]); // Stores list of FEN
+    const [currBoard,setCurrBoard] = useState(0); // Stores index of curr FEN
+    const [move,setMove] = useState([]); // Stores state of move to be made.
 
     useEffect(()=>{
-        //  console.log(listBoards[currBoard])
-    },[currBoard])
-
-    useEffect(()=>{
-        // console.log(move);
         let fen = listBoards[currBoard];
 
+        // Add styling when start of move determined.
         if (move.length === 1){
             let s = document.getElementById(move[0]);
             s.classList.add("selected-square");
@@ -28,6 +24,7 @@ export default function Board({startState = init_fen()}){
             }
         }
 
+        // Remove styling when move reset.
         else if (move.length === 0){
             let s = document.getElementsByClassName("selected-square");
             for (let i of s){
@@ -41,6 +38,7 @@ export default function Board({startState = init_fen()}){
         }
 
         else if (move.length === 2){
+            // Remove styling before move made.
             let s = document.getElementById(move[0]);
             s.classList.remove("selected-square");
 
@@ -50,10 +48,13 @@ export default function Board({startState = init_fen()}){
                 temp.classList.remove("possible-square");
             }
 
+            // Attempt to make move
             let res = make_move(listBoards[currBoard],move[0],move[1])
-            // console.log(res)
-
             if (res !== listBoards[currBoard]){
+                // If move resulted in different position
+                // Then update list of FENs and move forward
+
+                // If went back and forcing update then overwrite.
                 if (currBoard + 1 !== listBoards.length){
                     setListBoards(listBoards.slice(0,currBoard+1).concat([res]));
                     setCurrBoard((x)=>x+1);
@@ -67,10 +68,12 @@ export default function Board({startState = init_fen()}){
         }
     },[move])
 
+    // Retrieve properties
     let board = retrieve_board(listBoards[currBoard]);
     let meta = retrieve_meta(listBoards[currBoard]);
     let perspective = meta["turn"];
 
+    // Functions for navigation back and front.
     function incrementBoard(){
         if(listBoards.length > currBoard + 1){
             setCurrBoard((x)=>x+1);
@@ -79,13 +82,13 @@ export default function Board({startState = init_fen()}){
     }
 
     function decrementBoard(){
-
         if(currBoard >= 1){
             setCurrBoard((x)=>x-1);
             setMove([]);
         }
     }
 
+    // Render 8 rows.
     if (perspective === 1){
         return (
             <>

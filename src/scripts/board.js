@@ -16,12 +16,12 @@ export function copy_board(board){
 }
 
 export function print_board(board, as_white = true){
+    // Pretty prints board position
     let d = {
         "k": "\u2654","q": "\u2655","r": "\u2656","b": "\u2657","n": "\u2658","p": "\u2659",
         "K": "\u265A","Q": "\u265B","R": "\u265C","B": "\u265D","N": "\u265E","P": "\u265F",
         " ": " "
     }
-    // Pretty prints board position
     console.log();
     if (as_white){
         for (let row in board){
@@ -52,10 +52,12 @@ export function print_board(board, as_white = true){
 }
 
 export function init_fen(){
+    // Returns FEN of initial position
     return "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq -"
 }
 
 export function retrieve_fen(board,meta){
+    // Returns constructed FEN from board state and meta data
     let s = "";
 
     for (let i = 0; i < 8; i++){
@@ -80,6 +82,8 @@ export function retrieve_fen(board,meta){
             s += "/"
         }
     }
+
+    // Now adding meta data
     
     s += " "
     if (meta["turn"] === 1){
@@ -131,6 +135,7 @@ export function retrieve_fen(board,meta){
 }
 
 export function retrieve_board(fen){
+    // Function extracting board state from fen
     let board = [
         [" "," "," "," "," "," "," "," "],
         [" "," "," "," "," "," "," "," "],
@@ -173,6 +178,7 @@ export function retrieve_board(fen){
 }
 
 export function retrieve_meta(fen){
+    // Function extracting meta data from FEN
     let fields = fen.split(" ");
 
     let to_move = fields[1];
