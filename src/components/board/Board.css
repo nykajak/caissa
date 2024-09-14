@@ -6,3 +6,21 @@
     margin-right: auto;
     color: rgb(236, 255, 127);
 }
+
+.control-panel{
+    display: flex;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 10px;
+    /* border: 1px solid black; */
+}
+
+.control-button{
+    display: flex;
+    width: 95%;
+    justify-content: center;
+    border: none;
+    margin-left: 5px;
+    margin-right: 5px;
+}

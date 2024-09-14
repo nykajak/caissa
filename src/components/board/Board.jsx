@@ -98,9 +98,9 @@ export default function Board({startState = init_fen()}){
                     })}
                 </div>
 
-                <div>
-                    <button onClick={incrementBoard}>Next</button>
-                    <button onClick={decrementBoard}>Back</button>
+                <div className="control-panel">
+                    <button className="control-button" onClick={incrementBoard}>Next</button>
+                    <button className="control-button" onClick={decrementBoard}>Back</button>
                 </div>
             </>
         )
@@ -115,9 +115,9 @@ export default function Board({startState = init_fen()}){
                     })}
                 </div>  
                 
-                <div>
-                    <button onClick={incrementBoard}>Next</button>
-                    <button onClick={decrementBoard}>Back</button>
+                <div className="control-panel">
+                    <button className="control-button" onClick={incrementBoard}>Next</button>
+                    <button className="control-button" onClick={decrementBoard}>Back</button>
                 </div>
             </>
         )
