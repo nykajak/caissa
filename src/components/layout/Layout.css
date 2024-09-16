@@ -31,3 +31,17 @@
     background-color: black;
     color:white
 }
+
+.reminder-panel{
+    display: flex;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 10px;
+    color: antiquewhite;
+    justify-content: center;
+}
+
+.reminder-text{
+    justify-content: center;
+}

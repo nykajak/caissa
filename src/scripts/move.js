@@ -530,6 +530,27 @@ export function make_move(fen, notation_start, notation_end){
 
 
     make_move_raw(board,start,end)
+    
+    let x = get_square("h1");
+    if (!(is_rook(board,x) && is_white_piece(board,x))){
+        meta["whiteKingSideCastle"] = 0;
+    }
+
+    x = get_square("a1");
+    if (!(is_rook(board,x) && is_white_piece(board,x))){
+        meta["whiteQueenSideCastle"] = 0;
+    }
+
+    x = get_square("a8");
+    if (!(is_rook(board,x) && is_black_piece(board,x))){
+        meta["blackQueenSideCastle"] = 0;
+    }
+
+    x = get_square("h8");
+    if (!(is_rook(board,x) && is_black_piece(board,x))){
+        meta["blackKingSideCastle"] = 0;
+    }
+
     meta["turn"] = 1 - meta["turn"]
     return retrieve_fen(board,meta);
 }

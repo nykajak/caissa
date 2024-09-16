@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import {init_fen, retrieve_board,retrieve_meta} from "../../scripts/board.js"
 import {make_move, get_legal} from "../../scripts/move.js"
 import {get_notation,get_square} from "../../scripts/notation.js"
-import {Row} from "../row/Row.jsx"
+import {Layout} from "../layout/Layout.jsx"
 import "./Board.css"
 
 export default function Board({startState = init_fen()}){
@@ -89,37 +89,38 @@ export default function Board({startState = init_fen()}){
     }
 
     // Render 8 rows.
-    if (perspective === 1){
-        return (
-            <>
-                <div className="board">
-                    {board.map((val,idx)=>{
-                        return <Row board={board} x={idx} perspective={perspective} move={move} setMove={setMove} key={idx}/>
-                    })}
-                </div>
+    return (<Layout board={board} perspective={perspective} move={move} setMove={setMove} decrementBoard={decrementBoard} incrementBoard={incrementBoard}/>)
+    // if (perspective === 1){
+    //     return (
+    //         <>
+    //             <div className="board">
+    //                 {board.map((val,idx)=>{
+    //                     return <Row board={board} x={idx} perspective={perspective} move={move} setMove={setMove} key={idx}/>
+    //                 })}
+    //             </div>
 
-                <div className="control-panel">
-                    <button className="control-button" onClick={incrementBoard}>Next</button>
-                    <button className="control-button" onClick={decrementBoard}>Back</button>
-                </div>
-            </>
-        )
-    }
+    //             <div className="control-panel">
+    //                 <button className="control-button" onClick={decrementBoard}>Back</button>
+    //                 <button className="control-button" onClick={incrementBoard}>Next</button>
+    //             </div>
+    //         </>
+    //     )
+    // }
 
-    else{
-        return (
-            <>
-                <div className="board">
-                    {board.map((val,idx)=>{
-                        return <Row board={board} x={7-idx} perspective={perspective} move={move} setMove={setMove} key={idx}/>
-                    })}
-                </div>  
+    // else{
+    //     return (
+    //         <>
+    //             <div className="board">
+    //                 {board.map((val,idx)=>{
+    //                     return <Row board={board} x={7-idx} perspective={perspective} move={move} setMove={setMove} key={idx}/>
+    //                 })}
+    //             </div>  
                 
-                <div className="control-panel">
-                    <button className="control-button" onClick={incrementBoard}>Next</button>
-                    <button className="control-button" onClick={decrementBoard}>Back</button>
-                </div>
-            </>
-        )
-    }
+    //             <div className="control-panel">
+    //                 <button className="control-button" onClick={decrementBoard}>Back</button>
+    //                 <button className="control-button" onClick={incrementBoard}>Next</button>
+    //             </div>
+    //         </>
+    //     )
+    // }
 }

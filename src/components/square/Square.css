@@ -15,10 +15,9 @@
 }
 
 .selected-square{
-    opacity: 0.8;
+    opacity: 0.6;
 }
 
 .possible-square{
-    /* background-color:rgb(128, 0, 255); */
     opacity: 0.3;
 }
