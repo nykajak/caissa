@@ -275,7 +275,7 @@ export function get_legal_king(fen,square){
             }
 
             if (meta["whiteQueenSideCastle"] === 1){
-                if (is_empty(board,[square[0], square[1] - 1]) && is_empty(board,[square[0], square[1] - 2])){
+                if (is_empty(board,[square[0], square[1] - 1]) && is_empty(board,[square[0], square[1] - 2]) && is_empty(board,[square[0], square[1] - 3])){
                     if (is_safe(fen,square,[square[0], square[1] - 1]) && is_safe(fen,square,[square[0], square[1] - 2])){
                         moves.push([square[0],square[1] - 2])
                     }
@@ -293,7 +293,7 @@ export function get_legal_king(fen,square){
             }
 
             if (meta["blackQueenSideCastle"] === 1){
-                if (is_empty(board,[square[0], square[1] - 1]) && is_empty(board,[square[0], square[1] - 2])){
+                if (is_empty(board,[square[0], square[1] - 1]) && is_empty(board,[square[0], square[1] - 2]) && is_empty(board,[square[0], square[1] - 3])){
                     if (is_safe(fen,square,[square[0], square[1] - 1]) && is_safe(fen,square,[square[0], square[1] - 2])){
                         moves.push([square[0],square[1] - 2])
                     }
