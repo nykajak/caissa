@@ -4,6 +4,7 @@ import {make_move, get_legal} from "../../scripts/move.js"
 import {get_notation,get_square} from "../../scripts/notation.js"
 import {Layout} from "../layout/Layout.jsx"
 import "./Board.css"
+import { is_checkmate, is_stalemate } from "../../scripts/result.js"
 
 export default function Board({startState = init_fen()}){
     const [listBoards,setListBoards] = useState([startState]); // Stores list of FEN
@@ -88,39 +89,21 @@ export default function Board({startState = init_fen()}){
         }
     }
 
+        // Check for checkmate
+        if (is_checkmate(listBoards[currBoard])){
+            if (meta["turn"] === 1){
+                return <Layout board={board} perspective={perspective} move={move} setMove={setMove} decrementBoard={decrementBoard} incrementBoard={incrementBoard} gameOver={"Black Won!"}/>
+            }
+            else{
+                return <Layout board={board} perspective={perspective} move={move} setMove={setMove} decrementBoard={decrementBoard} incrementBoard={incrementBoard} gameOver={"White Won!"}/>
+            }
+        }
+
+         // Check for st;lemate
+         if (is_stalemate(listBoards[currBoard])){
+            return <Layout board={board} perspective={perspective} move={move} setMove={setMove} decrementBoard={decrementBoard} incrementBoard={incrementBoard} gameOver={"Draw!"}/>
+        }
+
     // Render 8 rows.
-    return (<Layout board={board} perspective={perspective} move={move} setMove={setMove} decrementBoard={decrementBoard} incrementBoard={incrementBoard}/>)
-    // if (perspective === 1){
-    //     return (
-    //         <>
-    //             <div className="board">
-    //                 {board.map((val,idx)=>{
-    //                     return <Row board={board} x={idx} perspective={perspective} move={move} setMove={setMove} key={idx}/>
-    //                 })}
-    //             </div>
-
-    //             <div className="control-panel">
-    //                 <button className="control-button" onClick={decrementBoard}>Back</button>
-    //                 <button className="control-button" onClick={incrementBoard}>Next</button>
-    //             </div>
-    //         </>
-    //     )
-    // }
-
-    // else{
-    //     return (
-    //         <>
-    //             <div className="board">
-    //                 {board.map((val,idx)=>{
-    //                     return <Row board={board} x={7-idx} perspective={perspective} move={move} setMove={setMove} key={idx}/>
-    //                 })}
-    //             </div>  
-                
-    //             <div className="control-panel">
-    //                 <button className="control-button" onClick={decrementBoard}>Back</button>
-    //                 <button className="control-button" onClick={incrementBoard}>Next</button>
-    //             </div>
-    //         </>
-    //     )
-    // }
+    return (<Layout board={board} perspective={perspective} move={move} setMove={setMove} decrementBoard={decrementBoard} incrementBoard={incrementBoard} gameOver={0}/>)
 }

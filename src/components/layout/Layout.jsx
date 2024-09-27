@@ -1,6 +1,6 @@
 import {Row} from "../row/Row.jsx"
 import "./Layout.css"
-export function Layout({board,perspective,move,setMove,decrementBoard,incrementBoard}){
+export function Layout({board,perspective,move,setMove,decrementBoard,incrementBoard,gameOver}){
     if (perspective === 1){
         return (
             <>
@@ -14,9 +14,11 @@ export function Layout({board,perspective,move,setMove,decrementBoard,incrementB
                     <button className="control-button" onClick={decrementBoard}>Back</button>
                     <button className="control-button" onClick={incrementBoard}>Next</button>
                 </div>
-
+                
                 <div className="reminder-panel">
-                    <p className="reminder-text">White to Move!</p>
+                    <p className="reminder-text">
+                        {gameOver === 0 ? "White to Move!" : gameOver}
+                    </p>
                 </div>
             </>
         )
@@ -36,7 +38,9 @@ export function Layout({board,perspective,move,setMove,decrementBoard,incrementB
                 </div>
 
                 <div className="reminder-panel">
-                    <p className="reminder-text">Black to Move!</p>
+                    <p className="reminder-text">
+                        {gameOver === 0 ? "Black to Move!" : gameOver}
+                    </p>
                 </div>
             </>
         )
