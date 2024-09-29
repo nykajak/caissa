@@ -9,10 +9,6 @@
     background-color: rgba(0,0,0,0.4);
 }
 
-.invisible{
-    display: none;
-}
-
 .promotion-div{
     display: flex;
     justify-content: center;

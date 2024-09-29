@@ -5,11 +5,12 @@ import {get_notation,get_square} from "../../scripts/notation.js"
 import {is_empty} from "../../scripts/piece.js"
 import {Layout} from "../layout/Layout.jsx"
 import { is_checkmate, is_stalemate, promotion_needed } from "../../scripts/result.js"
+import { Promotion } from "../promotion/Promotion.jsx"
 import "./Board.css"
 
-import { Promotion } from "../promotion/Promotion.jsx"
-
-export default function Board({startState = init_fen()}){
+// Board component is used to render chessboard.
+// Takes in startState
+export function Board({startState = init_fen()}){
     const [listBoards,setListBoards] = useState([startState]); // Stores list of FEN
     const [currBoard,setCurrBoard] = useState(0); // Stores index of curr FEN
     const [move,setMove] = useState([]); // Stores state of move to be made.
@@ -70,8 +71,17 @@ export default function Board({startState = init_fen()}){
                     setListBoards((x)=>[...x, res]);
                     setCurrBoard((x)=>x+1);
                 }
+                setMove([]);
             }
-            setMove([]);
+
+            else{
+                if (is_empty(retrieve_board(listBoards[currBoard]),get_square(move[1]))){
+                    setMove([])
+                }
+                else{
+                    setMove([move[1]])
+                }
+            }
         }
     },[move])
 

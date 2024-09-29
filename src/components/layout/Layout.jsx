@@ -1,5 +1,7 @@
 import {Row} from "../row/Row.jsx"
 import "./Layout.css"
+
+// Layout component renders the actual board using parameters derived from Board.jsx
 export function Layout({board,perspective,move,setMove,decrementBoard,incrementBoard,gameOver}){
     if (perspective === 1){
         return (
