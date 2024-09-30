@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import {init_fen, retrieve_board,retrieve_meta} from "../../scripts/board.js"
 import {make_move, get_legal} from "../../scripts/move.js"
 import {get_notation,get_square} from "../../scripts/notation.js"
-import {is_empty} from "../../scripts/piece.js"
+import {is_black_piece, is_empty, is_white_piece} from "../../scripts/piece.js"
 import {Layout} from "../layout/Layout.jsx"
 import { is_checkmate, is_stalemate, promotion_needed } from "../../scripts/result.js"
 import { Promotion } from "../promotion/Promotion.jsx"
@@ -20,10 +20,19 @@ export function Board({startState = init_fen()}){
 
         // Add styling when start of move determined.
         if (move.length === 1){
+            let meta = retrieve_meta(fen);
+            let board = retrieve_board(fen)
 
-            if (!is_empty(retrieve_board(fen),get_square(move[0]))){
-                let s = document.getElementById(move[0]);
-                s.classList.add("selected-square");
+            if (!is_empty(board,get_square(move[0]))){
+                if (meta["turn"] === 1 && is_white_piece(board,get_square(move[0]))){
+                    let s = document.getElementById(move[0]);
+                    s.classList.add("selected-square");
+                }
+
+                else if (meta["turn"] !== 1 && is_black_piece(board,get_square(move[0]))){
+                    let s = document.getElementById(move[0]);
+                    s.classList.add("selected-square");
+                }
             }
     
             let moves = get_legal(fen,get_square(move[0]));

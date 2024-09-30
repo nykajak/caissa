@@ -1,6 +1,5 @@
 .container{
     height:100vh;
-    border: 2px solid gold;
 }
 
 .menu-container-div{
@@ -33,7 +32,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 2px solid black;
     width: 100%;
     height: 80%;
 }
