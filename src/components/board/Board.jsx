@@ -64,8 +64,13 @@ export function Board({startState = init_fen()}){
 
                 // If went back and forcing update then overwrite.
                 if (currBoard + 1 !== listBoards.length){
-                    setListBoards(listBoards.slice(0,currBoard+1).concat([res]));
-                    setCurrBoard((x)=>x+1);
+                    if (listBoards[currBoard + 1] !== res){
+                        setListBoards(listBoards.slice(0,currBoard+1).concat([res]));
+                        setCurrBoard((x)=>x+1);
+                    }
+                    else{
+                        setCurrBoard((x)=>x+1);
+                    }
                 }
                 else{
                     setListBoards((x)=>[...x, res]);
