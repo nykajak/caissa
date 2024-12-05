@@ -1,25 +1,43 @@
-import { act, useEffect, useRef, useState } from "react"
+import {  useEffect, useState } from "react"
+import "./Timer.css"
 
-export function Timer({active}){
+export function Timer({active, color, timeOut}){
     const [time,setTime] = useState(300);
-
+    
     useEffect(()=>{
-        if (active == 1){
+        if (active == 1 && time > 0){
             const interval = setInterval(() => {
                 setTime(time - 1);
             }, 1000);
-    
+            
             return () => clearInterval(interval);
         }
     },[time,active])
-
+    
+    if (time == 0){
+        timeOut();
+    }
     let seconds = time % 60;
     let minutes = (time - seconds) / 60;
-    let formatted_time = `${minutes} minutes ${seconds} seconds!`
+
+    if (minutes < 10){
+        minutes = "0"+minutes;
+    }
+
+    if (seconds < 10){
+        seconds = "0"+seconds;
+    }
+
+    let formatted_time = `${minutes} : ${seconds}`
+    let classNames = 'timer-text timer-text-'+color;
+
+    if (active == 1){
+        classNames += " active";
+    }
 
     return (
-        <>
+        <span className={classNames}>
             {formatted_time}
-        </>
+        </span>
     )
 }

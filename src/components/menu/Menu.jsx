@@ -1,7 +1,5 @@
 import "./Menu.css"
 import { Board } from "../board/Board.jsx"
-import {Timer} from "../timer/Timer.jsx"
-import { TimerDriver } from "../timer/TimerDriver.jsx"
 
 export function Menu(){
     return (
@@ -12,7 +10,6 @@ export function Menu(){
 
             <div className="board-div">
                 <Board/>
-                <TimerDriver/>
             </div>
 
             <div className="footer-div">

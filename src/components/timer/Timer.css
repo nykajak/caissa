@@ -1,0 +1,26 @@
+.active.timer-text-white{
+    border: 3px solid red;
+}
+
+.active.timer-text-black{
+    border: 3px solid red;
+}
+
+.timer-text{
+    font-size:xx-large;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 10px;
+}
+
+.timer-text-white{
+    background-color:white;
+    color: black;
+    border: 3px solid black;
+}
+
+.timer-text-black{
+    background-color:black;
+    color: white;
+    border: 3px solid white;
+}
