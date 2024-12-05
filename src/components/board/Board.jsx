@@ -24,30 +24,31 @@ export function Board({startState = init_fen()}){
             let board = retrieve_board(fen)
 
             if (!is_empty(board,get_square(move[0]))){
-                if (meta["turn"] === 1 && is_white_piece(board,get_square(move[0]))){
-                    let s = document.getElementById(move[0]);
-                    s.classList.add("selected-square");
-                }
+                // If color of piece and color to move are same, add styling to start square.
+                let cond1 = meta["turn"] === 1 && is_white_piece(board,get_square(move[0]));
+                let cond2 = meta["turn"] !== 1 && is_black_piece(board,get_square(move[0]));
 
-                else if (meta["turn"] !== 1 && is_black_piece(board,get_square(move[0]))){
+                if (cond1 || cond2){
                     let s = document.getElementById(move[0]);
                     s.classList.add("selected-square");
                 }
             }
-    
+            
+            // Highlight all legal moves.
             let moves = get_legal(fen,get_square(move[0]));
             for (let move of moves){
                 document.getElementById(get_notation(move)).classList.add("possible-square");
             }
         }
 
-        // Remove styling when move reset.
         else if (move.length === 0){
+            // Remove styling when move reset.
             let s = document.getElementsByClassName("selected-square");
             for (let i of s){
                 i.classList.remove("selected-square");
             }
     
+            // Necessary to create copy as otherwise modification while iteration.
             s = [...document.getElementsByClassName("possible-square")];
             for (let i of s){   
                 i.classList.remove("possible-square");
@@ -58,11 +59,11 @@ export function Board({startState = init_fen()}){
             // Remove styling before move made.
             let s = document.getElementById(move[0]);
             s.classList.remove("selected-square");
-
-            let moves = get_legal(fen,get_square(move[0]));
-            for (let move of moves){
-                let temp = document.getElementById(get_notation(move))
-                temp.classList.remove("possible-square");
+            
+            // Necessary to create copy as otherwise modification while iteration.
+            s = [...document.getElementsByClassName("possible-square")];
+            for (let i of s){   
+                i.classList.remove("possible-square");
             }
 
             // Attempt to make move
@@ -71,8 +72,8 @@ export function Board({startState = init_fen()}){
                 // If move resulted in different position
                 // Then update list of FENs and move forward
 
-                // If went back and forcing update then overwrite.
                 if (currBoard + 1 !== listBoards.length){
+                    // If went back and forcing update then overwrite.
                     if (listBoards[currBoard + 1] !== res){
                         setListBoards(listBoards.slice(0,currBoard+1).concat([res]));
                         setCurrBoard((x)=>x+1);
@@ -81,17 +82,21 @@ export function Board({startState = init_fen()}){
                         setCurrBoard((x)=>x+1);
                     }
                 }
+                // If normal move (not update!)
                 else{
                     setListBoards((x)=>[...x, res]);
                     setCurrBoard((x)=>x+1);
                 }
-                setMove([]);
+                setMove([]); // Reset move
             }
 
+            // Invalid move
             else{
+                // If starting square empty reset move
                 if (is_empty(retrieve_board(listBoards[currBoard]),get_square(move[1]))){
                     setMove([])
                 }
+                // Else set selected piece as start
                 else{
                     setMove([move[1]])
                 }
@@ -134,6 +139,7 @@ export function Board({startState = init_fen()}){
         return <Layout board={board} perspective={perspective} move={move} setMove={setMove} decrementBoard={decrementBoard} incrementBoard={incrementBoard} gameOver={"Draw!"}/>
     }
 
+    // If promotion needed!
     let need_promotion = promotion_needed(listBoards[currBoard]);
     if (need_promotion[0] !== -1 && need_promotion[0] !== -1){
         return (
