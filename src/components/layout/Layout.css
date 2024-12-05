@@ -45,3 +45,19 @@
 .reminder-text{
     justify-content: center;
 }
+
+.layout-div{
+    display: flex;
+}
+
+.timer-div-white{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.timer-div-black{
+    display: flex;
+    justify-content: center;
+    flex-direction: column-reverse;
+}

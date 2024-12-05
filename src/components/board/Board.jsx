@@ -10,7 +10,7 @@ import "./Board.css"
 
 // Board component is used to render chessboard.
 // Takes in startState
-export function Board({startState = init_fen()}){
+export function Board({startState = init_fen(), friendly=false}){
     const [listBoards,setListBoards] = useState([startState]); // Stores list of FEN
     const [currBoard,setCurrBoard] = useState(0); // Stores index of curr FEN
     const [move,setMove] = useState([]); // Stores state of move to be made.
@@ -127,16 +127,16 @@ export function Board({startState = init_fen()}){
     // Check for checkmate
     if (is_checkmate(listBoards[currBoard])){
         if (meta["turn"] === 1){
-            return <Layout board={board} perspective={perspective} move={move} setMove={setMove} decrementBoard={decrementBoard} incrementBoard={incrementBoard} gameOver={"Black Won!"}/>
+            return <Layout friendly={friendly} board={board} perspective={perspective} move={move} setMove={setMove} decrementBoard={decrementBoard} incrementBoard={incrementBoard} gameOver={"Black Won!"}/>
         }
         else{
-            return <Layout board={board} perspective={perspective} move={move} setMove={setMove} decrementBoard={decrementBoard} incrementBoard={incrementBoard} gameOver={"White Won!"}/>
+            return <Layout friendly={friendly} board={board} perspective={perspective} move={move} setMove={setMove} decrementBoard={decrementBoard} incrementBoard={incrementBoard} gameOver={"White Won!"}/>
         }
     }
 
     // Check for stalemate
     if (is_stalemate(listBoards[currBoard])){
-        return <Layout board={board} perspective={perspective} move={move} setMove={setMove} decrementBoard={decrementBoard} incrementBoard={incrementBoard} gameOver={"Draw!"}/>
+        return <Layout friendly={friendly} board={board} perspective={perspective} move={move} setMove={setMove} decrementBoard={decrementBoard} incrementBoard={incrementBoard} gameOver={"Draw!"}/>
     }
 
     // If promotion needed!
@@ -144,7 +144,7 @@ export function Board({startState = init_fen()}){
     if (need_promotion[0] !== -1 && need_promotion[0] !== -1){
         return (
             <>
-                <Layout board={board} perspective={1-perspective} move={move} setMove={setMove} decrementBoard={decrementBoard} incrementBoard={incrementBoard} gameOver={0}/>
+                <Layout friendly={friendly} board={board} perspective={1-perspective} move={move} setMove={setMove} decrementBoard={decrementBoard} incrementBoard={incrementBoard} gameOver={0}/>
                 <Promotion fen={listBoards[currBoard]} setListBoards={setListBoards} listBoards={listBoards} square={need_promotion}/>       
             </>
         )
@@ -153,7 +153,7 @@ export function Board({startState = init_fen()}){
     // Render 8 rows.
     return (
         <>
-            <Layout board={board} perspective={perspective} move={move} setMove={setMove} decrementBoard={decrementBoard} incrementBoard={incrementBoard} gameOver={0}/>
+            <Layout friendly={friendly} board={board} perspective={perspective} move={move} setMove={setMove} decrementBoard={decrementBoard} incrementBoard={incrementBoard} gameOver={0}/>
         </>
     )
 }
