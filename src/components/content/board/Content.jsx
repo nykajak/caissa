@@ -41,6 +41,10 @@ export function Content({startState = init_fen(), friendly=false}){
             
             // Highlight all legal moves.
             let moves = get_legal(fen,get_square(move[0]));
+            if (gameOver !== 0){
+                moves = [];
+            }
+
             for (let move of moves){
                 document.getElementById(get_notation(move)).classList.add("possible-square");
             }
@@ -73,6 +77,9 @@ export function Content({startState = init_fen(), friendly=false}){
 
             // Attempt to make move
             let res = make_move(listBoards[currBoard],move[0],move[1])
+            if (gameOver !== 0){
+                res = listBoards[currBoard];
+            }
             if (res !== listBoards[currBoard]){
                 // If move resulted in different position
                 // Then update list of FENs and move forward
@@ -130,23 +137,20 @@ export function Content({startState = init_fen(), friendly=false}){
     }
     
     // Check for checkmate
-    if (is_checkmate(listBoards[currBoard]) && gameOver !== 0){
-        setGameOver((meta["turn"] === 1) ? "Black Won!": "White Won!");
-        // return (
-        //     <>
-        //         <Layout friendly={friendly} board={board} perspective={perspective} move={move} setMove={setMove} decrementBoard={decrementBoard} incrementBoard={incrementBoard} gameOver={(meta["turn"] === 1) ? "Black Won!": "White Won!"}/>
-        //     </>
-        // )
+    if (is_checkmate(listBoards[currBoard]) && gameOver === 0){
+        if (meta["turn"] === 1){
+            setGameOver("Black Won!");
+        }
+        else{
+            setGameOver("White Won!");
+        }
+        return <></>
     }
 
     // Check for stalemate
-    if (is_stalemate(listBoards[currBoard]) && gameOver !== 0){
+    if (is_stalemate(listBoards[currBoard]) && gameOver === 0){
         setGameOver("Draw!");
-        // return (
-        //     <>
-        //         <Layout friendly={friendly} board={board} perspective={perspective} move={move} setMove={setMove} decrementBoard={decrementBoard} incrementBoard={incrementBoard} gameOver={"Draw!"}/>
-        //     </>
-        // )
+        return <></>
     }
 
     // If promotion needed!
