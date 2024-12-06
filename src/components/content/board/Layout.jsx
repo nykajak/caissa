@@ -1,37 +1,14 @@
-import {Row} from "../row/Row.jsx"
 import {Timer} from "../timer/Timer.jsx"
+import { Board } from "./Board.jsx"
 
 import "./Layout.css"
 
 // Layout component renders the actual board using parameters derived from Board.jsx
 export function Layout({board,perspective,move,setMove,decrementBoard,incrementBoard,gameOver,friendly=false}){
-
-    let board_output;
-    
-    // Adding correct board orientation
-    if (perspective === 1){
-        board_output = (
-            <div key={0} className="board">
-                {board.map((val,idx)=>{
-                    return <Row board={board} x={idx} perspective={perspective} move={move} setMove={setMove} key={idx}/>
-                })}
-            </div>
-        )
-    }
-    else{
-        board_output = (
-            <div key={0} className="board">
-                {board.map((val,idx)=>{
-                    return <Row board={board} x={7-idx} perspective={perspective} move={move} setMove={setMove} key={idx}/>
-                })}
-            </div>  
-        )
-    }
-
     if (!friendly){
         return (
             <div className="layout-div">
-                {board_output}
+                <Board board={board} perspective={perspective} move={move} setMove={setMove}/>
                 <div className="other-div">
                     <div className={(perspective===1)?"timer-div-white":"timer-div-black"}>
                         <div className={(perspective===1)?"top-timer":"bottom-timer"}>
@@ -49,7 +26,7 @@ export function Layout({board,perspective,move,setMove,decrementBoard,incrementB
     else{
         return (
             <div className="layout-div">
-                {board_output}
+                <Board board={board} perspective={perspective} move={move} setMove={setMove}/>
                 <div className="other-div">
                     <div className="control-panel">
                         <button className="control-button" onClick={decrementBoard}>Go to prev move</button>

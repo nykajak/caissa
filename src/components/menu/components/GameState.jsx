@@ -1,10 +1,10 @@
 import "./GameState.css"
-import { BoardLayout } from "../../board/BoardLayout.jsx"
+import { Content } from "../../content/board/Content"
 
 export function GameState({gameState,friendly}){
     return (
         <div className="menu-board-div">
-            <BoardLayout key={gameState} friendly={friendly}/>
+            <Content key={gameState} friendly={friendly}/>
         </div>
     )
 }

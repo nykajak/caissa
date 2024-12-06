@@ -1,6 +1,6 @@
 import "./Square.css";
-import {get_notation} from "../../scripts/notation.js"
-import {is_empty} from "../../scripts/piece.js"
+import {get_notation} from "../../../scripts/notation.js"
+import {is_empty} from "../../../scripts/piece.js"
 
 // Square component is used to render correct piece and to add squares to moves
 // Takes in board, x (row no), y (col no), move and function to setMove
@@ -35,7 +35,7 @@ export function Square({board,x,y,move,setMove}){
     if (board[x][y] !== " "){
         output = (
             <>
-                <img src={require("./../../assets/" + d[board[x][y]])} alt="f" width="100%" height="100%"/>
+                <img src={require("./../../../assets/" + d[board[x][y]])} alt="f" width="100%" height="100%"/>
             </>
         )
     }

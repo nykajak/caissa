@@ -1,22 +1,23 @@
 import { useEffect, useState } from "react"
 
-import {init_fen, retrieve_board,retrieve_meta} from "../../scripts/board.js"
-import {make_move, get_legal} from "../../scripts/move.js"
-import {get_notation,get_square} from "../../scripts/notation.js"
-import {is_black_piece, is_empty, is_white_piece} from "../../scripts/piece.js"
-import { is_checkmate, is_stalemate, promotion_needed } from "../../scripts/result.js"
+import {init_fen, retrieve_board,retrieve_meta} from "../../../scripts/board.js"
+import {make_move, get_legal} from "../../../scripts/move.js"
+import {get_notation,get_square} from "../../../scripts/notation.js"
+import {is_black_piece, is_empty, is_white_piece} from "../../../scripts/piece.js"
+import { is_checkmate, is_stalemate, promotion_needed } from "../../../scripts/result.js"
 
-import {Layout} from "../layout/Layout.jsx"
+import {Layout} from "./Layout.jsx"
 import { Promotion } from "../promotion/Promotion.jsx"
 
-import "./BoardLayout.css"
+import "./Content.css"
 
 // Board component is used to render chessboard.
 // Takes in startState
-export function BoardLayout({startState = init_fen(), friendly=false}){
+export function Content({startState = init_fen(), friendly=false}){
     const [listBoards,setListBoards] = useState([startState]); // Stores list of FEN
     const [currBoard,setCurrBoard] = useState(0); // Stores index of curr FEN
     const [move,setMove] = useState([]); // Stores state of move to be made.
+    // const [gameOver,setGameOver] = useState(0);
 
     // Updation of styles on piece selection, move made etc
     useEffect(()=>{
@@ -130,12 +131,20 @@ export function BoardLayout({startState = init_fen(), friendly=false}){
     
     // Check for checkmate
     if (is_checkmate(listBoards[currBoard])){
-        return <Layout friendly={friendly} board={board} perspective={perspective} move={move} setMove={setMove} decrementBoard={decrementBoard} incrementBoard={incrementBoard} gameOver={(meta["turn"] === 1) ? "Black Won!": "White Won!"}/>
+        return (
+            <>
+                <Layout friendly={friendly} board={board} perspective={perspective} move={move} setMove={setMove} decrementBoard={decrementBoard} incrementBoard={incrementBoard} gameOver={(meta["turn"] === 1) ? "Black Won!": "White Won!"}/>
+            </>
+        )
     }
 
     // Check for stalemate
     if (is_stalemate(listBoards[currBoard])){
-        return <Layout friendly={friendly} board={board} perspective={perspective} move={move} setMove={setMove} decrementBoard={decrementBoard} incrementBoard={incrementBoard} gameOver={"Draw!"}/>
+        return (
+            <>
+                <Layout friendly={friendly} board={board} perspective={perspective} move={move} setMove={setMove} decrementBoard={decrementBoard} incrementBoard={incrementBoard} gameOver={"Draw!"}/>
+            </>
+        )
     }
 
     // If promotion needed!

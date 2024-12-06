@@ -1,5 +1,5 @@
 import { useState } from "react"
-import {retrieve_board,retrieve_meta,retrieve_fen} from "../../scripts/board.js"
+import {retrieve_board,retrieve_meta,retrieve_fen} from "../../../scripts/board.js"
 import "./Promotion.css"
 
 // Promotion component displays and handles options for promotion of pawns.
@@ -33,10 +33,10 @@ export function Promotion({fen,setListBoards,listBoards,square}){
         return (
             <div className="promotion-modal">
                 <div className="promotion-div">
-                    <span className="promotion-choice"><img src={require("./../../assets/" + l[0])} alt="not_found.jpg" onClick={()=>setChoice('N')}/></span>
-                    <span className="promotion-choice"><img src={require("./../../assets/" + l[1])} alt="not_found.jpg" onClick={()=>setChoice('B')}/></span>
-                    <span className="promotion-choice"><img src={require("./../../assets/" + l[2])} alt="not_found.jpg" onClick={()=>setChoice('R')}/></span>
-                    <span className="promotion-choice"><img src={require("./../../assets/" + l[3])} alt="not_found.jpg" onClick={()=>setChoice('Q')}/></span>
+                    <span className="promotion-choice"><img src={require("./../../../assets/" + l[0])} alt="not_found.jpg" onClick={()=>setChoice('N')}/></span>
+                    <span className="promotion-choice"><img src={require("./../../../assets/" + l[1])} alt="not_found.jpg" onClick={()=>setChoice('B')}/></span>
+                    <span className="promotion-choice"><img src={require("./../../../assets/" + l[2])} alt="not_found.jpg" onClick={()=>setChoice('R')}/></span>
+                    <span className="promotion-choice"><img src={require("./../../../assets/" + l[3])} alt="not_found.jpg" onClick={()=>setChoice('Q')}/></span>
                 </div>
             </div>
         )
@@ -47,10 +47,10 @@ export function Promotion({fen,setListBoards,listBoards,square}){
     return (
         <div className="promotion-modal">
             <div className="promotion-div">
-                <span className="promotion-choice"><img src={require("./../../assets/" + l[0])} alt="not_found.jpg" onClick={()=>setChoice('n')}/></span>
-                <span className="promotion-choice"><img src={require("./../../assets/" + l[1])} alt="not_found.jpg" onClick={()=>setChoice('b')}/></span>
-                <span className="promotion-choice"><img src={require("./../../assets/" + l[2])} alt="not_found.jpg" onClick={()=>setChoice('r')}/></span>
-                <span className="promotion-choice"><img src={require("./../../assets/" + l[3])} alt="not_found.jpg" onClick={()=>setChoice('q')}/></span>
+                <span className="promotion-choice"><img src={require("./../../../assets/" + l[0])} alt="not_found.jpg" onClick={()=>setChoice('n')}/></span>
+                <span className="promotion-choice"><img src={require("./../../../assets/" + l[1])} alt="not_found.jpg" onClick={()=>setChoice('b')}/></span>
+                <span className="promotion-choice"><img src={require("./../../../assets/" + l[2])} alt="not_found.jpg" onClick={()=>setChoice('r')}/></span>
+                <span className="promotion-choice"><img src={require("./../../../assets/" + l[3])} alt="not_found.jpg" onClick={()=>setChoice('q')}/></span>
             </div>
         </div>
     )

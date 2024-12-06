@@ -1,4 +1,4 @@
-import {Square} from "../square/Square.jsx"
+import {Square} from "./Square.jsx"
 import "./Row.css"
 
 // The Row component is purely to render rows
