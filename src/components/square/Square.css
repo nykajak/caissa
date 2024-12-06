@@ -13,11 +13,3 @@
 .white-square{
     background-color: grey;
 }
-
-.selected-square{
-    opacity: 0.6;
-}
-
-.possible-square{
-    opacity: 0.3;
-}
