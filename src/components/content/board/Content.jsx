@@ -17,7 +17,7 @@ export function Content({startState = init_fen(), friendly=false}){
     const [listBoards,setListBoards] = useState([startState]); // Stores list of FEN
     const [currBoard,setCurrBoard] = useState(0); // Stores index of curr FEN
     const [move,setMove] = useState([]); // Stores state of move to be made.
-    // const [gameOver,setGameOver] = useState(0);
+    const [gameOver,setGameOver] = useState(0);
 
     // Updation of styles on piece selection, move made etc
     useEffect(()=>{
@@ -130,21 +130,23 @@ export function Content({startState = init_fen(), friendly=false}){
     }
     
     // Check for checkmate
-    if (is_checkmate(listBoards[currBoard])){
-        return (
-            <>
-                <Layout friendly={friendly} board={board} perspective={perspective} move={move} setMove={setMove} decrementBoard={decrementBoard} incrementBoard={incrementBoard} gameOver={(meta["turn"] === 1) ? "Black Won!": "White Won!"}/>
-            </>
-        )
+    if (is_checkmate(listBoards[currBoard]) && gameOver !== 0){
+        setGameOver((meta["turn"] === 1) ? "Black Won!": "White Won!");
+        // return (
+        //     <>
+        //         <Layout friendly={friendly} board={board} perspective={perspective} move={move} setMove={setMove} decrementBoard={decrementBoard} incrementBoard={incrementBoard} gameOver={(meta["turn"] === 1) ? "Black Won!": "White Won!"}/>
+        //     </>
+        // )
     }
 
     // Check for stalemate
-    if (is_stalemate(listBoards[currBoard])){
-        return (
-            <>
-                <Layout friendly={friendly} board={board} perspective={perspective} move={move} setMove={setMove} decrementBoard={decrementBoard} incrementBoard={incrementBoard} gameOver={"Draw!"}/>
-            </>
-        )
+    if (is_stalemate(listBoards[currBoard]) && gameOver !== 0){
+        setGameOver("Draw!");
+        // return (
+        //     <>
+        //         <Layout friendly={friendly} board={board} perspective={perspective} move={move} setMove={setMove} decrementBoard={decrementBoard} incrementBoard={incrementBoard} gameOver={"Draw!"}/>
+        //     </>
+        // )
     }
 
     // If promotion needed!
@@ -152,7 +154,7 @@ export function Content({startState = init_fen(), friendly=false}){
     if (need_promotion[0] !== -1 && need_promotion[0] !== -1){
         return (
             <>
-                <Layout friendly={friendly} board={board} perspective={1-perspective} move={move} setMove={setMove} decrementBoard={decrementBoard} incrementBoard={incrementBoard} gameOver={0}/>
+                <Layout friendly={friendly} board={board} perspective={1-perspective} move={move} setMove={setMove} decrementBoard={decrementBoard} incrementBoard={incrementBoard} gameOver={gameOver} setGameOver={setGameOver}/>
                 <Promotion fen={listBoards[currBoard]} setListBoards={setListBoards} listBoards={listBoards} square={need_promotion}/>       
             </>
         )
@@ -161,7 +163,7 @@ export function Content({startState = init_fen(), friendly=false}){
     // Render 8 rows.
     return (
         <>
-            <Layout friendly={friendly} board={board} perspective={perspective} move={move} setMove={setMove} decrementBoard={decrementBoard} incrementBoard={incrementBoard} gameOver={0}/>
+            <Layout friendly={friendly} board={board} perspective={perspective} move={move} setMove={setMove} decrementBoard={decrementBoard} incrementBoard={incrementBoard} gameOver={gameOver} setGameOver={setGameOver}/>
         </>
     )
 }

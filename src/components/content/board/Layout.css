@@ -8,12 +8,10 @@
 
 .control-panel{
     width: 100%;
-    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* background-color: chocolate; */
 }
 
 .control-button{
@@ -21,29 +19,18 @@
     background-color: black;
     color: antiquewhite;
     padding: 10px;
-    margin-bottom: 10%;
+    margin-top: 2%;
+    margin-bottom: 2%;
 }
 
 .control-button:hover{
     color:white;
 }
 
-.reminder-panel{
-    display: flex;
-    width: 400px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-top: 10px;
-    color: antiquewhite;
-    justify-content: center;
-}
-
-.reminder-text{
-    justify-content: center;
-}
-
 .other-div{
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
     width: 25%;
 }
