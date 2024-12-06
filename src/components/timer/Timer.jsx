@@ -36,8 +36,8 @@ export function Timer({active, color, timeOut}){
     }
 
     return (
-        <span className={classNames}>
+        <div className={classNames}>
             {formatted_time}
-        </span>
+        </div>
     )
 }

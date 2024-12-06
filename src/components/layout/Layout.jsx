@@ -51,10 +51,10 @@ export function Layout({board,perspective,move,setMove,decrementBoard,incrementB
             <div className="layout-div">
                 {render_output}
                 <div className={(perspective===1)?"timer-div-white":"timer-div-black"}>
-                    <div>
+                    <div className={(perspective===1)?"top-timer":"bottom-timer"}>
                         <Timer active={(gameOver === 0) ? 1-perspective : 0} color={"black"} timeOut={()=>console.log("White won!")}/>
                     </div>
-                    <div>
+                    <div className={(perspective===1)?"bottom-timer":"top-timer"}>
                         <Timer active={(gameOver === 0) ? perspective : 0} color={"white"} timeOut={()=>console.log("Black won!")}/>
                     </div>
                 </div>

@@ -54,10 +54,26 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
+    margin-left: 15px;
 }
 
 .timer-div-black{
     display: flex;
     justify-content: center;
     flex-direction: column-reverse;
+    margin-left: 15px;
+}
+
+.top-timer{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100%;
+}
+
+.bottom-timer{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 100%;
 }
