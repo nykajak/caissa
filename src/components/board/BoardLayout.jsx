@@ -6,11 +6,11 @@ import {is_black_piece, is_empty, is_white_piece} from "../../scripts/piece.js"
 import {Layout} from "../layout/Layout.jsx"
 import { is_checkmate, is_stalemate, promotion_needed } from "../../scripts/result.js"
 import { Promotion } from "../promotion/Promotion.jsx"
-import "./Board.css"
+import "./BoardLayout.css"
 
 // Board component is used to render chessboard.
 // Takes in startState
-export function Board({startState = init_fen(), friendly=false}){
+export function BoardLayout({startState = init_fen(), friendly=false}){
     const [listBoards,setListBoards] = useState([startState]); // Stores list of FEN
     const [currBoard,setCurrBoard] = useState(0); // Stores index of curr FEN
     const [move,setMove] = useState([]); // Stores state of move to be made.
