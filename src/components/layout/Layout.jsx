@@ -6,7 +6,6 @@ import "./Layout.css"
 // Layout component renders the actual board using parameters derived from Board.jsx
 export function Layout({board,perspective,move,setMove,decrementBoard,incrementBoard,gameOver,friendly=false}){
 
-    let render_output = [];
     let board_output;
     
     // Adding correct board orientation
@@ -28,25 +27,6 @@ export function Layout({board,perspective,move,setMove,decrementBoard,incrementB
             </div>  
         )
     }
-
-    if (friendly){
-        // Adding control panel
-        // render_output.push(
-        //     <div key={1} className="control-panel">
-        //         <button className="control-button" onClick={decrementBoard}>&lt;</button>
-        //         <button className="control-button" onClick={incrementBoard}>&gt;</button>
-        //     </div>
-        // )
-        // Adding reminder text
-        // render_output.push(
-        //     <div key={2} className="reminder-panel">
-        //         <p className="reminder-text">
-        //             {gameOver === 0 ? (perspective == 1 ? "White to Move!" : "Black to Move!") : gameOver}
-        //         </p>
-        //     </div>
-        // )
-    }
-
 
     if (!friendly){
         return (
