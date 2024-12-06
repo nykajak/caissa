@@ -18,7 +18,8 @@
 }
 
 .menu-option-button:hover{
-    border: 1px solid rgb(94, 94, 94);;
+    color:white;
+    border: 1px solid rgb(94, 94, 94);
 }
 
 .menu-options-div{

@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react"
+
 import {init_fen, retrieve_board,retrieve_meta} from "../../scripts/board.js"
 import {make_move, get_legal} from "../../scripts/move.js"
 import {get_notation,get_square} from "../../scripts/notation.js"
 import {is_black_piece, is_empty, is_white_piece} from "../../scripts/piece.js"
-import {Layout} from "../layout/Layout.jsx"
 import { is_checkmate, is_stalemate, promotion_needed } from "../../scripts/result.js"
+
+import {Layout} from "../layout/Layout.jsx"
 import { Promotion } from "../promotion/Promotion.jsx"
+
 import "./BoardLayout.css"
 
 // Board component is used to render chessboard.
@@ -15,6 +18,7 @@ export function BoardLayout({startState = init_fen(), friendly=false}){
     const [currBoard,setCurrBoard] = useState(0); // Stores index of curr FEN
     const [move,setMove] = useState([]); // Stores state of move to be made.
 
+    // Updation of styles on piece selection, move made etc
     useEffect(()=>{
         let fen = listBoards[currBoard];
 
@@ -123,15 +127,10 @@ export function BoardLayout({startState = init_fen(), friendly=false}){
             setMove([]);
         }
     }
-
+    
     // Check for checkmate
     if (is_checkmate(listBoards[currBoard])){
-        if (meta["turn"] === 1){
-            return <Layout friendly={friendly} board={board} perspective={perspective} move={move} setMove={setMove} decrementBoard={decrementBoard} incrementBoard={incrementBoard} gameOver={"Black Won!"}/>
-        }
-        else{
-            return <Layout friendly={friendly} board={board} perspective={perspective} move={move} setMove={setMove} decrementBoard={decrementBoard} incrementBoard={incrementBoard} gameOver={"White Won!"}/>
-        }
+        return <Layout friendly={friendly} board={board} perspective={perspective} move={move} setMove={setMove} decrementBoard={decrementBoard} incrementBoard={incrementBoard} gameOver={(meta["turn"] === 1) ? "Black Won!": "White Won!"}/>
     }
 
     // Check for stalemate

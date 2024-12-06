@@ -3,29 +3,29 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 2px solid gold;
+    width: 75%;
 }
 
 .control-panel{
     width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    color: aliceblue;
+    justify-content: center;
+    align-items: center;
+    /* background-color: chocolate; */
 }
 
 .control-button{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    border-radius: 10px;
-    margin-left: 5px;
-    margin-right: 5px;
+    font-size:x-large;
+    background-color: black;
+    color: antiquewhite;
+    padding: 10px;
+    margin-bottom: 10%;
 }
 
 .control-button:hover{
-    background-color: black;
-    color:white
+    color:white;
 }
 
 .reminder-panel{
@@ -44,11 +44,14 @@
 
 .other-div{
     display: flex;
-    width: 100%;
+    justify-content: center;
+    width: 25%;
 }
 
 .layout-div{
     display: flex;
+    width: 100%;
+    height: 100%;
 }
 
 .timer-div-white{
@@ -63,18 +66,4 @@
     justify-content: center;
     flex-direction: column-reverse;
     margin-left: 15px;
-}
-
-.top-timer{
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    height: 100%;
-}
-
-.bottom-timer{
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    height: 100%;
 }

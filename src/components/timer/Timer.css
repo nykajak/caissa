@@ -8,9 +8,9 @@
 
 .timer-text{
     font-size:xx-large;
-    padding-left: 5px;
-    padding-right: 5px;
-    border-radius: 10px;
+    padding: 5px;
+    margin-bottom: 10%;
+    border-radius: 10%;
 }
 
 .timer-text-white{

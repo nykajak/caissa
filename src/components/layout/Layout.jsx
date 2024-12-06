@@ -1,6 +1,7 @@
 import {Row} from "../row/Row.jsx"
-import "./Layout.css"
 import {Timer} from "../timer/Timer.jsx"
+
+import "./Layout.css"
 
 // Layout component renders the actual board using parameters derived from Board.jsx
 export function Layout({board,perspective,move,setMove,decrementBoard,incrementBoard,gameOver,friendly=false}){
@@ -70,9 +71,9 @@ export function Layout({board,perspective,move,setMove,decrementBoard,incrementB
             <div className="layout-div">
                 {board_output}
                 <div className="other-div">
-                    <div key={1} className="control-panel">
-                        <button className="control-button" onClick={decrementBoard}>&lt;</button>
-                        <button className="control-button" onClick={incrementBoard}>&gt;</button>
+                    <div className="control-panel">
+                        <button className="control-button" onClick={decrementBoard}>Go to prev move</button>
+                        <button className="control-button" onClick={incrementBoard}>Go to next move</button>
                     </div>
                 </div>
             </div>
