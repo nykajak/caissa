@@ -1,6 +1,6 @@
 # Caissa
 
-A sample chess application made with react. Currently only supports local play using one device for both players. Still in development and this is the current state of the same.
+A sample chess application made with react supporting local play on one device. Still in development.
 
 # Rules and Controls
 
@@ -8,22 +8,15 @@ You know chess? Great! Same rules. Click on starting square and then click on en
 
 # Features currently
 
-- You can play chess.
+- Fully fledged chess game.
 - Highlighting of legal moves for selected piece.
-- Feature to navigate back and forward through a chess game.
+- Two different modes - casual with takebacks and timed (5 minutes).
 
 # Future features
 
-- Responsive layout for mobile and other non-laptop devices.
-- Better notifications and layout.
-- a-h and 1-8 on side of board.
-
-# Future features (maybe)
-
-- Drag and drop to move pieces.
-- Board editor and custom start position.
-- Casual and competitive modes (with timer)
+- Responsive layout for all kinds of devices.
+- Customisation features like notation support, custom start position, more time controls.
 
 # Spinoff project (also maybe)
 
-- Online chess game between two different devices.
+- Online chess website (between two different devices).
