@@ -1,7 +1,7 @@
 .promotion-modal{
     position: fixed; 
     z-index: 1; 
-    padding-top: 35px; 
+    padding-top: 0.5%; 
     left: 0;
     top: 0;
     width: 100%; 
@@ -14,7 +14,7 @@
     justify-content: center;
     background-color: rgb(94, 94, 94);
     margin: auto;
-    padding: 5px;
+    padding: 0.3vi;
     border: 1px solid #888;
     width: 20%;
 }

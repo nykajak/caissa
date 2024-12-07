@@ -35,7 +35,7 @@ export function Square({board,x,y,move,setMove}){
     if (board[x][y] !== " "){
         output = (
             <>
-                <img src={require("./../../../assets/" + d[board[x][y]])} alt="f" width="100%" height="100%"/>
+                <img src={require("./../../../assets/" + d[board[x][y]])} alt="f"/>
             </>
         )
     }

@@ -1,7 +1,10 @@
 .square{
     display: flex;
-    min-width: 68px;
-    min-height: 68px;
+    height: auto;
+    min-height: 4.5vi;
+    min-width: 4.5vi;
+    max-height: 4.5vi;
+    max-width: 4.5vi;
     align-items: center;
     justify-content: center;
 }
@@ -12,4 +15,9 @@
 
 .white-square{
     background-color: grey;
+}
+
+img{
+    width: 4vi;
+    height: auto;
 }
