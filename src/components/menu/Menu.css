@@ -2,11 +2,25 @@
     height:100vh;
 }
 
-.menu-content-div{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 80%;
+
+@media only screen and (max-width: 850px) {
+    .menu-content-div{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 80%;
+    }
+}
+
+@media only screen and (min-width: 850px) {
+    .menu-content-div{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 80%;
+    }
 }

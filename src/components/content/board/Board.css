@@ -1,7 +1,29 @@
-.board{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 75%;
+@media only screen and (max-width: 450px){
+    .board{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 850px) and (min-width: 450px) {
+    .board{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+    }
+}
+
+@media only screen and (min-width: 850px) {
+    .board{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 75%;
+    }
 }
