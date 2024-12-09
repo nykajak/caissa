@@ -11,10 +11,10 @@ You know chess? Great! Same rules. Click on starting square and then click on en
 - Fully fledged chess game.
 - Highlighting of legal moves for selected piece.
 - Two different modes - casual with takebacks and timed (5 minutes).
+- Responsive layout for all kinds of devices.
 
 # Future features
 
-- Responsive layout for all kinds of devices.
 - Customisation features like notation support, custom start position, more time controls.
 
 # Spinoff project (also maybe)
