@@ -1,6 +1,6 @@
 # Caissa
 
-A sample chess application made with react supporting local play on one device. Still in development.
+A sample chess application made with react supporting local play on one device. Still in development. [Live Link](https://caissa.vercel.app/)
 
 # Rules and Controls
 
