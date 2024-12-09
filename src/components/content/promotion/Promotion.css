@@ -16,5 +16,5 @@
     margin: auto;
     padding: 0.3vi;
     border: 1px solid #888;
-    width: 20%;
+    width: fit-content;
 }
