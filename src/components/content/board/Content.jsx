@@ -8,7 +8,8 @@ import { is_checkmate, is_stalemate, promotion_needed } from "../../../scripts/r
 
 import {Layout} from "./Layout.jsx"
 import { Promotion } from "../promotion/Promotion.jsx"
-
+import { MoveList } from "./MoveList.jsx"
+    
 import "./Content.css"
 
 // Board component is used to render chessboard.
@@ -17,6 +18,7 @@ export function Content({startState = init_fen(), friendly=false}){
     const [listBoards,setListBoards] = useState([startState]); // Stores list of FEN
     const [currBoard,setCurrBoard] = useState(0); // Stores index of curr FEN
     const [move,setMove] = useState([]); // Stores state of move to be made.
+    const [moveList, setMoveList] = useState([]);
     const [gameOver,setGameOver] = useState(0);
 
     // Updation of styles on piece selection, move made etc
@@ -88,6 +90,7 @@ export function Content({startState = init_fen(), friendly=false}){
                     // If went back and forcing update then overwrite.
                     if (listBoards[currBoard + 1] !== res){
                         setListBoards(listBoards.slice(0,currBoard+1).concat([res]));
+                        setMoveList(moveList.slice(0,currBoard).concat([move]));
                         setCurrBoard((x)=>x+1);
                     }
                     else{
@@ -98,6 +101,7 @@ export function Content({startState = init_fen(), friendly=false}){
                 else{
                     setListBoards((x)=>[...x, res]);
                     setCurrBoard((x)=>x+1);
+                    setMoveList((x)=>[...x, move]);
                 }
                 setMove([]); // Reset move
             }
@@ -135,6 +139,11 @@ export function Content({startState = init_fen(), friendly=false}){
             setMove([]);
         }
     }
+
+    function accessBoard(index){
+        setCurrBoard(index);
+        setMove([]);
+    }
     
     // Check for checkmate
     if (is_checkmate(listBoards[currBoard]) && gameOver === 0){
@@ -157,17 +166,19 @@ export function Content({startState = init_fen(), friendly=false}){
     let need_promotion = promotion_needed(listBoards[currBoard]);
     if (need_promotion[0] !== -1 && need_promotion[0] !== -1){
         return (
-            <>
+            <div className="content-div">
                 <Layout friendly={friendly} board={board} perspective={1-perspective} move={move} setMove={setMove} decrementBoard={decrementBoard} incrementBoard={incrementBoard} gameOver={gameOver} setGameOver={setGameOver}/>
+                <MoveList list={moveList} current={currBoard} accessBoard={accessBoard}/>
                 <Promotion fen={listBoards[currBoard]} setListBoards={setListBoards} listBoards={listBoards} square={need_promotion}/>       
-            </>
+            </div>
         )
     }
 
     // Render 8 rows.
     return (
-        <>
+        <div className="content-div">
             <Layout friendly={friendly} board={board} perspective={perspective} move={move} setMove={setMove} decrementBoard={decrementBoard} incrementBoard={incrementBoard} gameOver={gameOver} setGameOver={setGameOver}/>
-        </>
+            <MoveList list={moveList} current={currBoard} accessBoard={accessBoard}/>
+        </div>
     )
 }

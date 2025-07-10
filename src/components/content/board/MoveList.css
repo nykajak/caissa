@@ -1,0 +1,60 @@
+.moveList-div{
+    position: relative;
+    gap: 5px;
+    background-color: var(--black-square-color);
+    height: 200px;
+    
+}
+
+.last-move button{
+    background-color: var(--black-square-color) !important;
+}
+
+.moveList-div-scrollable{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:5px;
+}
+
+.moveList-content{
+    display: grid;
+    grid-template-columns: 1fr 5fr 5fr;
+    width: 90%;
+    background-color: var(--dark-color);
+    /* padding: 5px; */
+}
+
+.move-white, .move-black, .move-number{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+}
+
+.move-white button, .move-black button{
+    display: flex;  
+    justify-content: center;
+    background-color: inherit;
+    width: 100%;
+    border:none;
+    color: var(--light-color);
+    padding: 5px;
+}
+
+.move-white:hover button, .move-black:hover button{
+    background-color: var(--black-square-color);
+}
+
+@media only screen and (min-width: 600px) {
+    .moveList-div{
+        height: auto;
+        width: 100%;
+    }
+}

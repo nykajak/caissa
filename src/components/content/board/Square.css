@@ -1,62 +1,29 @@
 .black-square{
-    background-color: rgb(48, 48, 48);
+    background-color: var(--black-square-color);
 }
 
 .white-square{
-    background-color: grey;
+    background-color: var(--white-square-color);
 }
 
-@media only screen and (max-width: 450px) {
-    .square{
-        display: flex;
-        height: auto;
-        min-height: 11vw;
-        min-width: 11vw;
-        max-height: 11vw;
-        max-width: 11vw;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    img{
-        width: 9vw;
-        height: auto;
-    }
+.square{
+    display: flex;
+    flex-grow: 1;
+    width: 11vw;
+    aspect-ratio: 1 / 1;
+    align-items: center;
+    justify-content: center;
 }
 
-@media only screen and (max-width: 850px) and (min-width: 450px) {
-    .square{
-        display: flex;
-        height: auto;
-        min-height: 8vh;
-        min-width: 8vh;
-        max-height: 8vh;
-        max-width: 8vh;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    img{
-        width: 7vh;
-        height: auto;
-    }
+img{
+    width: 80%;
+    aspect-ratio: 1 / 1;
 }
 
-@media only screen and (min-width: 850px) {
-    .square{
-        display: flex;
-        height: auto;
-        min-height: 9vh;
-        min-width: 9vh;
-        max-height: 9vh;
-        max-width: 9vh;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    img{
-        width: 8vh;
-        height: auto;
+@media only screen and (min-width: 600px){
+    .square {
+        flex-grow: 0;
+        width: calc(500px / 8);
     }
 }
 

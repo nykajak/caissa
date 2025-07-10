@@ -1,4 +1,51 @@
+:root {
+    --light-color: 	hsl(252, 100%, 96%);
+    --dark-color: 	hsl(263, 13%, 13%);
+    --brand-color-bright: hsl(251, 100%, 77%);
+    --brand-color-dull:	hsl(260, 71%, 70%);
+    --brand-color-accent: hsl(283, 48%, 52%);
+
+    --dull-grey: hsl(0, 0%, 50%);
+
+    --lightness-delta: 20%;
+    --black-square-color:  hsl(from var(--dark-color) h s calc(l + 15));
+    --white-square-color: hsl(from var(--light-color) h calc(s - 50) calc(l - 10));
+}
+
+/* div {
+    padding: 3px;
+    border: 1px solid red;
+} */
+
 body{
-    background-color: rgb(74, 74, 74);
-    overflow: hidden;
+    box-sizing: border-box; 
+    margin:0;
+    padding:0;
+
+    background-color: var(--dark-color);
+    color: var(--light-color);
+
+    font-size: 1rem;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    
+    /* 
+    Breakpoints: 
+        x < 450px 
+            450px < x < 850px
+            x > 850px
+    */
+
+    /* 
+        @media only screen and (max-width: 540px)
+        @media only screen and (min-width: 540px) and (max-width: 600px)
+        @media only screen and (min-width: 850px) 
+    */
+    
+    /* 
+        Max width: 450px
+            0.75 rem
+            1 rem
+            1.25 rem
+     */
+    
 }

@@ -1,5 +1,5 @@
 import "./GameState.css"
-import { Content } from "../../content/board/Content"
+import { Content } from "../../content/board/Content.jsx"
 
 export function GameState({gameState,friendly}){
     return (

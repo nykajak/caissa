@@ -2,6 +2,11 @@ import "./Square.css";
 import {get_notation} from "../../../scripts/notation.js"
 import {is_empty} from "../../../scripts/piece.js"
 
+const pieceImages = import.meta.glob('../../../assets/*.png', {
+  eager: true,
+  import: 'default',
+});
+
 // Square component is used to render correct piece and to add squares to moves
 // Takes in board, x (row no), y (col no), move and function to setMove
 export function Square({board,x,y,move,setMove}){
@@ -35,7 +40,7 @@ export function Square({board,x,y,move,setMove}){
     if (board[x][y] !== " "){
         output = (
             <>
-                <img src={require("./../../../assets/" + d[board[x][y]])} alt="f"/>
+                {<img src={pieceImages["../../../assets/" + d[board[x][y]]]} alt="chess piece" />}
             </>
         )
     }

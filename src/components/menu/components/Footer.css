@@ -1,11 +1,11 @@
 .menu-footer-div {
     display: flex;
     flex-direction: column;
-    background-color: rgb(94, 94, 94);
-    box-sizing: border-box; 
-    color: antiquewhite;
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 10%;
+    
+    color: var(--dull-grey);
+    font-size: 0.75rem;
+    margin-top: 30px;
 }
